@@ -1,0 +1,48 @@
+CREATE TABLE ProductoEntity (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nombre TEXT NOT NULL,
+    precio REAL NOT NULL,
+    stock INTEGER NOT NULL
+);
+
+CREATE TABLE VentaEntity (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    fecha TEXT NOT NULL,
+    metodoPago TEXT NOT NULL,
+    total REAL NOT NULL
+);
+
+CREATE TABLE ItemVentaEntity (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    ventaId INTEGER NOT NULL,
+    nombreProducto TEXT NOT NULL,
+    precioUnitario REAL NOT NULL,
+    cantidad INTEGER NOT NULL
+);
+
+selectAllProductos:
+SELECT * FROM ProductoEntity;
+
+insertProducto:
+INSERT INTO ProductoEntity(nombre, precio, stock) VALUES (?, ?, ?);
+
+deleteProducto:
+DELETE FROM ProductoEntity WHERE id = ?;
+
+updateStock:
+UPDATE ProductoEntity SET stock = ? WHERE id = ?;
+
+selectAllVentas:
+SELECT * FROM VentaEntity;
+
+insertVenta:
+INSERT INTO VentaEntity(fecha, metodoPago, total) VALUES (?, ?, ?);
+
+selectItemsByVentaId:
+SELECT * FROM ItemVentaEntity WHERE ventaId = ?;
+
+insertItemVenta:
+INSERT INTO ItemVentaEntity(ventaId, nombreProducto, precioUnitario, cantidad) VALUES (?, ?, ?, ?);
+
+lastInsertRowId:
+SELECT last_insert_rowid();
